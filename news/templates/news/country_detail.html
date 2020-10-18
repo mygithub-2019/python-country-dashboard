@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <!--  &lt;!&ndash; Font Awesome &ndash;&gt;
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    &lt;!&ndash; Bootstrap &ndash;&gt;
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    &lt;!&ndash; Material Design for Bootstrap &ndash;&gt;
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/css/mdb.min.css" rel="stylesheet">-->
+
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+{% if news %}
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark success-color">
+  <a class="navbar-brand" href="#">{{ country.name }}
+      <sup><img class="" src="{{ country.flag }}" width="20px" height="20px" alt="Card image cap"></sup>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Top headlines
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#business">Business</a>
+          <span class="sr-only">(current)</span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tech">Tech</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Science</a>
+      </li>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Stocks</a>
+      </li>
+         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Sports</a>
+      </li>
+        <li>
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+     <div class="md-form my-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search by topic" aria-label="Search">
+        <i class="fas fa-search"></i>
+    </div>
+  </form>
+        </li>
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
+{% endif %}
+<br>
+<div class="container">
+    <div class="row">
+        {% if news %}
+        {% for newsItem in news%}
+        <div class="jumbotron text-center hoverable p-4">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 offset-md-1 mx-3 my-3">
+
+                    <!-- Featured image -->
+                    <div class="view overlay">
+                        <img src="{{ newsItem.urlToImage }}" class="img-fluid"
+                             alt="Sample image for first version of blog listing">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-7 text-md-left ml-3 mt-3">
+
+                    <!-- Excerpt -->
+                    <a href="#!" class="green-text">
+                        <h6 class="h6 pb-1"><i class="fas fa-globe"></i> {{country.name}}</h6>
+                    </a>
+
+                    <h4 class="h4 mb-4">{{ newsItem.title}}</h4>
+
+                    <p class="font-weight-normal">
+                        {{ newsItem.description}}
+                    </p>
+
+
+                    <p class="font-weight-normal">by <a><strong>{{newsItem.source.name }}</strong></a>, {{ newsItem.date }} at {{ newsItem.time }}</p>
+
+                        <a class="btn btn-outline-success btn-rounded waves-effect" href="/news"><i class="fas fa-angle-double-left"></i>  Go Back</a>
+
+                        <a class="btn btn-outline-success btn-rounded waves-effect float-right" href="{{newsItem.url}}" target="_blank">Read in detail <i class="fas fa-angle-double-right"></i></a>
+
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        {% endfor%}
+
+         <dib class="container" id="business">
+            <div class="card">
+  <div class="card-header">
+    Quote
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+    </blockquote>
+  </div>
+</div>
+        </dib>
+
+        <dib class="container" id="tech">
+            <div class="card text-center">
+              <div class="card-header text-left">
+                Technology
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#!" class="btn btn-primary">Go somewhere</a>
+              </div>
+              <div class="card-footer text-muted">
+                2 days ago
+              </div>
+            </div>
+        </dib>
+
+        {% else %}
+        {% load static %}
+            <div class="container text-center">
+                <p><img src="{% static 'news/nonews.png' %}" class="flipnews"/></p><br><br><br>
+                <a class="btn btn-outline-primary btn-rounded waves-effect"
+                href="/news/"> <i class="fas fa-angle-double-left"></i> Go Back To Home</a>
+            </div>
+        {% endif%}
+    </div>
+
+</div>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<!-- Material Design for Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/js/mdb.min.js"></script>
+<style>
+    .flipnews {
+  animation: shake 10s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(10px, 10px) rotate(0deg); }
+  10% { transform: translate(-10px, -20px) rotate(-1deg); }
+  20% { transform: translate(-30px, 0px) rotate(1deg); }
+  30% { transform: translate(30px, 20px) rotate(0deg); }
+  40% { transform: translate(10px, -10px) rotate(1deg); }
+  50% { transform: translate(-10px, 20px) rotate(-1deg); }
+  60% { transform: translate(-30px, 10px) rotate(0deg); }
+  70% { transform: translate(30px, 10px) rotate(-1deg); }
+  80% { transform: translate(-10px, -10px) rotate(1deg); }
+  90% { transform: translate(10px, 20px) rotate(0deg); }
+  100% { transform: translate(10px, -20px) rotate(-1deg); }
+}
+img{
+border-radius: 5px;
+    }
+
+    .btn-rounded {
+    border-radius: 25px 25px 25px 25px;
+}
+</style>
+</body>
+</html>
